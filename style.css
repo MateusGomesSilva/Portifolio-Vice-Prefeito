@@ -106,26 +106,13 @@ body {
 
 /* Hero Section */
 .hero {
-    min-height: 100vh;
-    min-height: 100dvh;
-    padding: 8rem 2rem 4rem;
+    padding: 8.5rem 2rem 5rem;
     display: flex;
     align-items: center;
     position: relative;
     width: 100%;
-    background-image: 
-        linear-gradient(90deg, 
-            #081221 0%, 
-            rgba(8, 18, 33, 0.92) 40%, 
-            rgba(8, 18, 33, 0.55) 75%, 
-            rgba(8, 18, 33, 0.25) 100%
-        ),
-        url('hero-bg.jpg');
-    background-repeat: no-repeat;
-    background-position: right center;
-    background-size: cover;
-    background-attachment: fixed;
-    overflow: hidden;
+    background: radial-gradient(circle at 85% 30%, #0f223d 0%, var(--bg-primary) 70%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .hero-content {
@@ -398,15 +385,6 @@ body {
 @media (max-width: 1024px) {
     .hero {
         padding: 7.5rem 2rem 4rem;
-        background-image: 
-            linear-gradient(90deg, 
-                #081221 0%, 
-                rgba(8, 18, 33, 0.92) 45%, 
-                rgba(8, 18, 33, 0.6) 75%, 
-                rgba(8, 18, 33, 0.3) 100%
-            ),
-            url('hero-bg.jpg');
-        background-position: 80% center;
     }
     .hero-content h2 {
         font-size: 2.5rem;
@@ -435,19 +413,7 @@ body {
         grid-template-columns: 1fr;
     }
     .hero {
-        min-height: 100vh;
-        min-height: 100dvh;
-        padding: 7rem 1.5rem 3.5rem;
-        background-attachment: scroll;
-        background-image: 
-            linear-gradient(180deg, 
-                rgba(8, 18, 33, 0.95) 0%, 
-                rgba(8, 18, 33, 0.85) 50%, 
-                rgba(8, 18, 33, 0.95) 100%
-            ),
-            url('hero-bg.jpg');
-        background-position: 68% center;
-        background-size: cover;
+        padding: 6.5rem 1.5rem 3.5rem;
     }
     .hero-content h2 {
         font-size: 2.1rem;
@@ -464,15 +430,7 @@ body {
 
 @media (max-width: 480px) {
     .hero {
-        padding: 6.5rem 1.25rem 3rem;
-        background-image: 
-            linear-gradient(180deg, 
-                rgba(8, 18, 33, 0.96) 0%, 
-                rgba(8, 18, 33, 0.88) 55%, 
-                rgba(8, 18, 33, 0.96) 100%
-            ),
-            url('hero-bg.jpg');
-        background-position: 65% center;
+        padding: 6rem 1.25rem 3rem;
     }
     .hero-content h2 {
         font-size: 1.8rem;
