@@ -1,189 +1,174 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Walderrama | Trabalho, Diálogo e Compromisso</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+  <title>Walderrama | Trabalho, Diálogo e Compromisso</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+  <header class="header" id="header">
+    <a class="brand" href="#inicio" aria-label="Walderrama - início">
+      <img src="logo-extrema-white.png" alt="Logo de Extrema" class="header-logo-img">
+      <span class="brand-copy">
+        <strong>Sidney Soares Carvalho</strong>
+        <small>WALDERRAMA · VICE-PREFEITO</small>
+      </span>
+    </a>
+    <button class="menu-btn" id="menuToggle" aria-label="Abrir menu">☰</button>
+    <nav class="nav" id="navMenu">
+      <a href="#inicio">Início</a>
+      <a href="#sobre">Sobre Mim</a>
+      <a href="#atuacao">Atuação</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#noticias">Notícias</a>
+      <a href="https://wa.me/5535998930631" target="_blank" rel="noopener" class="nav-contact">Contato ↗</a>
+    </nav>
+  </header>
 
-    <!-- Cabeçalho / Navbar -->
-    <header class="header">
-        <div class="logo">
-            <img src="logo-extrema-white.png" alt="Logo Prefeitura de Extrema" class="header-logo-img">
-            <div>
-                <h1>Sidney Soares Carvalho (Walderrama)</h1>
-                <small>VICE-PREFEITO DE EXTREMA</small>
-            </div>
+  <main>
+    <!-- HERO SCROLL-DRIVEN (CANVAS + LENIS) -->
+    <section id="inicio" class="hero-scroll">
+      <div class="hero-sticky">
+        <div class="hero-media" aria-hidden="true">
+          <canvas id="heroCanvas"></canvas>
+          <div class="hero-shade"></div>
         </div>
-        <button class="menu-btn" id="menuToggle">☰</button>
-        <nav class="nav" id="navMenu">
-            <a href="#inicio">Início</a>
-            <a href="#sobre">Sobre Mim</a>
-            <a href="#atuacao">Atuação</a>
-            <a href="#projetos">Projetos</a>
-            <a href="#noticias">Notícias</a>
-            <a href="https://wa.me/5535998930631" target="_blank" class="contact-btn">Contato</a>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="inicio" class="hero bg-primary">
-        <div class="hero-container">
-            <div class="hero-content">
-                <span class="tag">VICE-PREFEITO</span>
-                <h2>Trabalho, diálogo e compromisso<br>por uma cidade melhor.</h2>
-                <p>Atuando ao lado da população para construir uma cidade mais justa, humana e próspera.</p>
-                <div class="hero-buttons">
-                    <a href="#sobre" class="btn btn-primary">CONHEÇA MINHA HISTÓRIA</a>
-                    <a href="https://wa.me/5535998930631" target="_blank" class="btn btn-outline">ENTRE EM CONTATO</a>
-                </div>
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow hero-eyebrow">VICE-PREFEITO · EXTREMA / MG</span>
+            <h1><span>Trabalho.</span><span>Diálogo.</span><span>Compromisso.</span></h1>
+            <p class="hero-lead">Uma atuação pública próxima das pessoas, feita para transformar presença em resultado.</p>
+            <div class="hero-actions">
+              <a href="#sobre" class="action action-primary">Conheça minha história <span>↓</span></a>
+              <a href="https://wa.me/5535998930631" target="_blank" rel="noopener" class="action action-line">Entre em contato <span>↗</span></a>
             </div>
-            <div class="hero-image-wrapper">
-                <img src="hero-bg.jpg" alt="Sidney Soares Carvalho (Walderrama)" class="hero-img">
-            </div>
+          </div>
+          <div class="hero-meta">
+            <span class="hero-meta-line"></span>
+            <p>Presença no território<br>escuta ativa<br>trabalho conjunto</p>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Sobre Mim -->
-    <section id="sobre" class="section bg-secondary">
+    <!-- SOBRE MIM -->
+    <section id="sobre" class="bg-secondary-full">
+      <div class="section-container">
         <span class="tag">SOBRE MIM</span>
-        <h2>Quem sou eu</h2>
-        <p class="section-desc">Uma trajetória construída com diálogo, responsabilidade e compromisso com as pessoas.
-            Este espaço reúne ações, projetos e informações sobre a atuação pública.</p>
+        <h2 class="section-title">Quem sou eu</h2>
+        <p class="section-desc">Uma trajetória construída com diálogo, responsabilidade e compromisso com as pessoas. Este espaço reúne ações, projetos e informações sobre a atuação pública.</p>
         <div class="profile-grid">
-            <div class="profile-info">
-                <p>Minha trajetória é marcada pela busca de soluções que gerem impacto positivo, valorizando a
-                    participação da comunidade e o trabalho conjunto.</p>
-            </div>
-            <div class="profile-card">
-                <p><strong>Nome:</strong> Sidney Soares Carvalho (Walderrama)</p>
-                <p><strong>Cargo:</strong> Vice-Prefeito</p>
-                <p><strong>Naturalidade:</strong> Cidade - UF</p>
-                <p><strong>Valores:</strong> Ética, diálogo, respeito e transparência</p>
-            </div>
+          <div class="profile-info">
+            <p>Minha trajetória é marcada pela busca de soluções que gerem impacto positivo, valorizando a participação da comunidade e o trabalho conjunto.</p>
+          </div>
+          <div class="profile-card">
+            <p><strong>Nome:</strong> Sidney Soares Carvalho (Walderrama)</p>
+            <p><strong>Cargo:</strong> Vice-Prefeito</p>
+            <p><strong>Naturalidade:</strong> Extrema - MG</p>
+            <p><strong>Valores:</strong> Ética, diálogo, respeito e transparência</p>
+          </div>
         </div>
+      </div>
     </section>
 
-    <!-- Áreas de Atuação -->
+    <!-- ATUAÇÃO -->
     <section id="atuacao" class="section bg-primary">
-        <span class="tag">ATUAÇÃO</span>
-        <h2>Áreas de atuação</h2>
-        <div class="grid-cards">
-            <div class="card">
-                <h3>Administração</h3>
-                <p>Gestão eficiente, responsável e transparente.</p>
-            </div>
-            <div class="card">
-                <h3>Infraestrutura</h3>
-                <p>Melhoria urbana, mobilidade e qualidade dos espaços públicos.</p>
-            </div>
-            <div class="card">
-                <h3>Saúde</h3>
-                <p>Acesso e qualidade no atendimento à população.</p>
-            </div>
-            <div class="card">
-                <h3>Educação</h3>
-                <p>Investimento no futuro das pessoas.</p>
-            </div>
-            <div class="card">
-                <h3>Desenvolvimento</h3>
-                <p>Geração de oportunidades, emprego e renda.</p>
-            </div>
+      <span class="tag">ATUAÇÃO</span>
+      <h2 class="section-title">Áreas de atuação</h2>
+      <div class="grid-cards">
+        <div class="card">
+          <h3>Administração</h3>
+          <p>Gestão eficiente, responsável e transparente.</p>
         </div>
+        <div class="card">
+          <h3>Infraestrutura</h3>
+          <p>Melhoria urbana, mobilidade e qualidade dos espaços públicos.</p>
+        </div>
+        <div class="card">
+          <h3>Saúde</h3>
+          <p>Acesso e qualidade no atendimento à população.</p>
+        </div>
+        <div class="card">
+          <h3>Educação</h3>
+          <p>Investimento no futuro das pessoas.</p>
+        </div>
+        <div class="card">
+          <h3>Desenvolvimento</h3>
+          <p>Geração de oportunidades, emprego e renda.</p>
+        </div>
+      </div>
     </section>
 
-    <!-- Projetos e Conquistas -->
-    <section id="projetos" class="section bg-secondary">
-        <span class="tag">PROJETOS E CONQUISTAS</span>
-        <h2>O que já realizamos</h2>
-        <div class="grid-cards">
-            <div class="card">
-                <span class="badge">EM ANDAMENTO</span>
-                <h3>Recapeamento de Vias</h3>
-                <p>Melhoria da malha viária e mais segurança para quem circula pela cidade.</p>
-            </div>
-            <div class="card">
-                <span class="badge badge-success">CONCLUÍDO</span>
-                <h3>Reforço na Saúde</h3>
-                <p>Ampliação do atendimento e fortalecimento da rede municipal.</p>
-            </div>
-            <div class="card">
-                <span class="badge badge-success">CONCLUÍDO</span>
-                <h3>Investimento na Educação</h3>
-                <p>Modernização dos espaços e apoio às escolas municipais.</p>
-            </div>
-            <div class="card">
-                <span class="badge">EM ANDAMENTO</span>
-                <h3>Praças e Lazer</h3>
-                <p>Novos espaços públicos para convivência, esporte e lazer.</p>
-            </div>
+    <!-- PROJETOS E CONQUISTAS -->
+    <section id="projetos" class="stats-section">
+      <div class="stats-overlay"></div>
+      <div class="stats-content">
+        <div class="section-kicker"><span>PROJETOS E CONQUISTAS</span></div>
+        <div class="stats-heading">
+          <h2 class="display-title">Presença que<br><em>vira ação.</em></h2>
+          <p>Acompanhamento próximo, planejamento e compromisso com entregas que impactam a vida das pessoas.</p>
         </div>
         <div class="stats-grid">
-            <div><strong>+50</strong>
-                <p>Projetos acompanhados</p>
-            </div>
-            <div><strong>+20</strong>
-                <p>Comunidades atendidas</p>
-            </div>
-            <div><strong>+15</strong>
-                <p>Ações realizadas</p>
-            </div>
-            <div><strong>+10 mil</strong>
-                <p>Pessoas beneficiadas</p>
-            </div>
+          <div class="stat"><strong data-count="50">+0</strong><span>Projetos acompanhados</span></div>
+          <div class="stat"><strong data-count="20">+0</strong><span>Comunidades atendidas</span></div>
+          <div class="stat"><strong data-count="15">+0</strong><span>Ações realizadas</span></div>
+          <div class="stat"><strong data-count="10">+0 mil</strong><span>Pessoas beneficiadas</span></div>
         </div>
+      </div>
     </section>
 
-    <!-- Notícias -->
+    <!-- NOTÍCIAS -->
     <section id="noticias" class="section bg-primary">
-        <span class="tag">NOTÍCIAS</span>
-        <h2>Fique por dentro</h2>
-        <div class="grid-cards">
-            <div class="card">
-                <small class="news-date">20 MAI 2026 · Gestão Pública</small>
-                <h3>Reunião com lideranças comunitárias</h3>
-                <p>Diálogo e escuta para construir soluções junto à população.</p>
-            </div>
-            <div class="card">
-                <small class="news-date">15 MAI 2026 · Desenvolvimento</small>
-                <h3>Novas ações para o desenvolvimento econômico</h3>
-                <p>Debates sobre oportunidades e crescimento para a cidade.</p>
-            </div>
-            <div class="card">
-                <small class="news-date">10 MAI 2026 · Cidade</small>
-                <h3>Mutirão de limpeza no bairro central</h3>
-                <p>Ação conjunta para uma cidade mais limpa e organizada.</p>
-            </div>
+      <span class="tag">NOTÍCIAS</span>
+      <h2 class="section-title">Fique por dentro</h2>
+      <div class="grid-cards">
+        <div class="card">
+          <small class="news-date">20 MAI 2026 • GESTÃO PÚBLICA</small>
+          <h3>Reunião com lideranças comunitárias</h3>
+          <p>Diálogo e escuta para construir soluções junto à população.</p>
         </div>
+        <div class="card">
+          <small class="news-date">15 MAI 2026 • DESENVOLVIMENTO</small>
+          <h3>Novas ações para o desenvolvimento econômico</h3>
+          <p>Debates sobre oportunidades e crescimento para a cidade.</p>
+        </div>
+        <div class="card">
+          <small class="news-date">10 MAI 2026 • CIDADE</small>
+          <h3>Mutirão de limpeza no bairro central</h3>
+          <p>Ação conjunta para uma cidade mais limpa e organizada.</p>
+        </div>
+      </div>
     </section>
+  </main>
 
-    <!-- Rodapé -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div>
-                <h3>Walderrama</h3>
-                <p>Trabalho, diálogo e compromisso por uma cidade melhor para todos.</p>
-            </div>
-            <div>
-                <h4>ENTRE EM CONTATO</h4>
-                <p>(35) 99893-0631</p>
-                <p>contato@exemplo.com.br</p>
-                <p>Extrema - MG</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 Nome do Vice-Prefeito. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+  <footer class="footer">
+    <div class="footer-top">
+      <div>
+        <span class="eyebrow">WALDERRAMA</span>
+        <h2>Trabalho que<br><em>aproxima.</em></h2>
+      </div>
+      <div class="footer-contact">
+        <span>CONTATO</span>
+        <a href="https://wa.me/5535998930631" target="_blank" rel="noopener">(35) 99893-0631 ↗</a>
+        <p>Extrema · Minas Gerais</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Sidney Soares Carvalho</span>
+      <span>Vice-Prefeito de Extrema</span>
+    </div>
+  </footer>
 
-    <!-- Botão de Voltar ao Topo -->
-    <button id="scrollTopBtn" class="scroll-top-btn">&uarr;</button>
+  <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Voltar ao topo">↑</button>
 
-    <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+  <script src="script.js"></script>
 </body>
-
 </html>
