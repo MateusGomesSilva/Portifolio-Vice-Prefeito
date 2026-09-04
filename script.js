@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
           n++;
         }
         averageBg = `rgb(${Math.round(r / n)},${Math.round(g / n)},${Math.round(b / n)})`;
-      } catch (e) {}
+      } catch (e) { }
     }
 
     for (let i = 0; i < TOTAL_FRAMES; i++) {
