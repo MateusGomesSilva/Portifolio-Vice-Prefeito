@@ -1,11 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
-  gsap.registerPlugin(ScrollTrigger);
+  // GSAP Plugin Registration
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+  }
 
-  // Lenis: smooth scroll premium
-  const lenis = new Lenis({ duration: 1.15, smoothWheel: true, syncTouch: false });
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => lenis.raf(time * 1000));
-  gsap.ticker.lagSmoothing(0);
+  // Lenis: smooth scroll premium com fallback de segurança
+  let lenis = null;
+  if (typeof Lenis !== 'undefined' && typeof gsap !== 'undefined') {
+    try {
+      lenis = new Lenis({ duration: 1.15, smoothWheel: true, syncTouch: false });
+      if (typeof ScrollTrigger !== 'undefined') {
+        lenis.on('scroll', ScrollTrigger.update);
+      }
+      gsap.ticker.add((time) => lenis.raf(time * 1000));
+      gsap.ticker.lagSmoothing(0);
+    } catch (e) {
+      console.warn('Lenis init warning:', e);
+    }
+  }
 
   // Mobile menu
   const menuToggle = document.getElementById('menuToggle');
@@ -15,11 +27,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Scroll-driven video frames on canvas
   const canvas = document.getElementById('heroCanvas');
-  if (canvas) {
+  if (canvas && typeof gsap !== 'undefined') {
     const ctx = canvas.getContext('2d', { alpha: false });
     const TOTAL_FRAMES = 180;
     const FRAME_SPEED = 2.0;
-    const IMAGE_SCALE = 1.0; // 100% cover to stretch to the right edge completely
+    const IMAGE_SCALE = 1.0;
     const images = [];
     let loaded = 0;
     let currentFrame = 0;
@@ -79,74 +91,94 @@ document.addEventListener('DOMContentLoaded', () => {
           sampleBackground(img);
           drawFrame(0);
         }
-        if (loaded === TOTAL_FRAMES) ScrollTrigger.refresh();
+        if (loaded === TOTAL_FRAMES && typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.refresh();
+        }
       };
       images.push(img);
     }
     resizeCanvas();
     window.addEventListener('resize', () => gsap.delayedCall(0.15, resizeCanvas));
 
-    const heroTl = gsap.timeline({
-      scrollTrigger: {
+    if (typeof ScrollTrigger !== 'undefined') {
+      const heroTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.hero-scroll',
+          start: 'top top',
+          end: 'bottom bottom',
+          scrub: FRAME_SPEED,
+          invalidateOnRefresh: true
+        }
+      });
+      heroTl.to('.hero-media', { clipPath: 'circle(100% at 50% 50%)', ease: 'none' }, 0);
+      heroTl.to('.hero-copy', { xPercent: -8, yPercent: -7, opacity: 0.18, ease: 'none' }, 0.05);
+      heroTl.to('.hero-meta', { x: 35, opacity: 0, ease: 'none' }, 0.05);
+      heroTl.to('.hero-shade', { opacity: 0.48, ease: 'none' }, 0.15);
+
+      ScrollTrigger.create({
         trigger: '.hero-scroll',
         start: 'top top',
         end: 'bottom bottom',
-        scrub: FRAME_SPEED,
-        invalidateOnRefresh: true
-      }
-    });
-    heroTl.to('.hero-media', { clipPath: 'circle(100% at 50% 50%)', ease: 'none' }, 0);
-    heroTl.to('.hero-copy', { xPercent: -8, yPercent: -7, opacity: 0.18, ease: 'none' }, 0.05);
-    heroTl.to('.hero-meta', { x: 35, opacity: 0, ease: 'none' }, 0.05);
-    heroTl.to('.hero-shade', { opacity: 0.48, ease: 'none' }, 0.15);
-
-    ScrollTrigger.create({
-      trigger: '.hero-scroll',
-      start: 'top top',
-      end: 'bottom bottom',
-      onUpdate: self => {
-        const index = Math.min(TOTAL_FRAMES - 1, Math.floor(self.progress * (TOTAL_FRAMES - 1)));
-        if (index !== currentFrame) {
-          currentFrame = index;
-          drawFrame(index);
+        onUpdate: self => {
+          const index = Math.min(TOTAL_FRAMES - 1, Math.floor(self.progress * (TOTAL_FRAMES - 1)));
+          if (index !== currentFrame) {
+            currentFrame = index;
+            drawFrame(index);
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   // Animated stat counters
-  document.querySelectorAll('[data-count]').forEach(el => {
-    const target = Number(el.dataset.count);
-    const obj = { value: 0 };
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 82%',
-      once: true,
-      onEnter: () => {
-        gsap.to(obj, {
-          value: target,
-          duration: 1.7,
-          ease: 'power2.out',
-          onUpdate: () => {
-            el.textContent = `+${Math.round(obj.value)}${target === 10 ? ' mil' : ''}`;
-          }
-        });
-      }
+  if (typeof ScrollTrigger !== 'undefined' && typeof gsap !== 'undefined') {
+    document.querySelectorAll('[data-count]').forEach(el => {
+      const target = Number(el.dataset.count);
+      const obj = { value: 0 };
+      ScrollTrigger.create({
+        trigger: el,
+        start: 'top 82%',
+        once: true,
+        onEnter: () => {
+          gsap.to(obj, {
+            value: target,
+            duration: 1.7,
+            ease: 'power2.out',
+            onUpdate: () => {
+              el.textContent = `+${Math.round(obj.value)}${target === 10 ? ' mil' : ''}`;
+            }
+          });
+        }
+      });
     });
-  });
+  }
 
   // Header & back-to-top button state
   const header = document.getElementById('header');
   const topBtn = document.getElementById('scrollTopBtn');
-  ScrollTrigger.create({
-    start: 80,
-    onUpdate: self => {
-      header?.classList.toggle('scrolled', self.scroll() > 80);
-      topBtn?.classList.toggle('show', self.scroll() > 600);
+  if (typeof ScrollTrigger !== 'undefined') {
+    ScrollTrigger.create({
+      start: 80,
+      onUpdate: self => {
+        header?.classList.toggle('scrolled', self.scroll() > 80);
+        topBtn?.classList.toggle('show', self.scroll() > 600);
+      }
+    });
+  } else {
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY || window.pageYOffset;
+      header?.classList.toggle('scrolled', scrollY > 80);
+      topBtn?.classList.toggle('show', scrollY > 600);
+    });
+  }
+
+  topBtn?.addEventListener('click', () => {
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.1 });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   });
-
-  topBtn?.addEventListener('click', () => lenis.scrollTo(0, { duration: 1.1 }));
 
   // Atuação Carousel (Continuous Marquee Auto-Scroll)
   const atuacaoCarousel = document.getElementById('atuacaoCarousel');
@@ -171,8 +203,12 @@ document.addEventListener('DOMContentLoaded', () => {
       let currentX = 0;
 
       function getGroupStep() {
-        const gap = parseFloat(window.getComputedStyle(atuacaoTrack).gap) || 28;
-        return originalGroup.offsetWidth + gap;
+        const groupWidth = originalGroup.offsetWidth;
+        if (!groupWidth || groupWidth <= 0) return 0;
+        const gapStr = window.getComputedStyle(atuacaoTrack).gap;
+        const parsedGap = parseFloat(gapStr);
+        const gap = Number.isFinite(parsedGap) ? parsedGap : 28;
+        return groupWidth + gap;
       }
 
       function getClientX(e) {
@@ -182,14 +218,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return 0;
       }
 
-      // Sync continuous scrolling loop with GSAP ticker
-      gsap.ticker.add(() => {
+      function updateMarquee() {
         if (!isDragging) {
           if (!isHovered) {
             x -= speed;
           }
           const step = getGroupStep();
-          if (step > 0) {
+          if (step > 100) {
             while (x <= -step) {
               x += step;
             }
@@ -197,9 +232,23 @@ document.addEventListener('DOMContentLoaded', () => {
               x -= step;
             }
           }
-          gsap.set(atuacaoTrack, { x: x });
+          if (typeof gsap !== 'undefined') {
+            gsap.set(atuacaoTrack, { x: x });
+          } else {
+            atuacaoTrack.style.transform = `translate3d(${x}px, 0, 0)`;
+          }
         }
-      });
+      }
+
+      if (typeof gsap !== 'undefined') {
+        gsap.ticker.add(updateMarquee);
+      } else {
+        function rAF() {
+          updateMarquee();
+          requestAnimationFrame(rAF);
+        }
+        requestAnimationFrame(rAF);
+      }
 
       // Hover controls: pause on hover for easy reading
       atuacaoCarousel.addEventListener('mouseenter', () => { isHovered = true; });
@@ -225,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dragDelta = pageX - startX;
         x = currentX + dragDelta;
         const step = getGroupStep();
-        if (step > 0) {
+        if (step > 100) {
           while (x <= -step) {
             x += step;
             startX += step;
@@ -235,7 +284,11 @@ document.addEventListener('DOMContentLoaded', () => {
             startX -= step;
           }
         }
-        gsap.set(atuacaoTrack, { x: x });
+        if (typeof gsap !== 'undefined') {
+          gsap.set(atuacaoTrack, { x: x });
+        } else {
+          atuacaoTrack.style.transform = `translate3d(${x}px, 0, 0)`;
+        }
       };
 
       const onPointerUp = () => {

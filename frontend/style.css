@@ -414,8 +414,11 @@ button {
   cursor: grab;
   user-select: none;
   -webkit-user-select: none;
+  touch-action: pan-y;
   mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
   -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+  mask-size: 100% 100%;
+  -webkit-mask-size: 100% 100%;
 }
 
 .atuacao-carousel.is-dragging {
