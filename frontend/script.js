@@ -110,8 +110,9 @@ document.addEventListener('DOMContentLoaded', () => {
           invalidateOnRefresh: true
         }
       });
+      const isMobile = window.innerWidth <= 768;
       heroTl.to('.hero-media', { clipPath: 'circle(100% at 50% 50%)', ease: 'none' }, 0);
-      heroTl.to('.hero-copy', { xPercent: -8, yPercent: -7, opacity: 0.18, ease: 'none' }, 0.05);
+      heroTl.to('.hero-copy', { xPercent: isMobile ? 0 : -8, yPercent: isMobile ? -4 : -7, opacity: 0.18, ease: 'none' }, 0.05);
       heroTl.to('.hero-meta', { x: 35, opacity: 0, ease: 'none' }, 0.05);
       heroTl.to('.hero-shade', { opacity: 0.48, ease: 'none' }, 0.15);
 

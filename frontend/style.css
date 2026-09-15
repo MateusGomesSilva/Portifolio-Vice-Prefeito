@@ -718,7 +718,29 @@ button {
   }
 
   .hero-grid {
-    padding: 105px 22px 40px;
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    padding: 100px 22px 30px;
+    overflow: hidden;
+  }
+
+  .hero-copy {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+
+  .hero-eyebrow {
+    display: block;
+    max-width: 100%;
+    font-size: clamp(9px, 2.6vw, 11px);
+    letter-spacing: clamp(1px, 0.4vw, 2.4px);
+    white-space: normal;
+    overflow-wrap: break-word;
   }
 
   .hero-media {
@@ -731,30 +753,46 @@ button {
   }
 
   .hero-copy h1 {
-    font-size: clamp(3.6rem, 16vw, 6rem);
-    line-height: 0.82;
-    margin: 22px 0 30px;
+    width: 100%;
+    max-width: 100%;
+    font-size: clamp(2.4rem, 11vw, 4.2rem);
+    line-height: 0.88;
+    letter-spacing: -0.05em;
+    margin: 18px 0 24px;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .hero-copy h1 span {
+    display: block;
+    width: 100%;
+    max-width: 100%;
     white-space: normal;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
   }
 
   .hero-copy h1 span:nth-child(2),
   .hero-copy h1 span:nth-child(3) {
-    padding-left: 0;
+    padding-left: 0 !important;
   }
 
   .hero-lead {
-    font-size: 15px;
-    margin-left: 0;
-    max-width: 330px;
+    font-size: clamp(14px, 3.8vw, 16px);
+    margin-left: 0 !important;
+    width: 100%;
+    max-width: 100%;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   .hero-actions {
-    margin-left: 0;
-    gap: 15px;
+    margin-left: 0 !important;
+    gap: 14px;
     flex-wrap: wrap;
+    width: 100%;
+    max-width: 100%;
   }
 
   .action {
