@@ -480,7 +480,6 @@ button {
   letter-spacing: 2.5px;
   font-weight: 700;
   color: var(--acid);
-  border-bottom: 1px solid var(--line);
   padding-bottom: 16px;
   text-transform: uppercase;
 }
@@ -520,17 +519,12 @@ button {
   margin: 90px auto 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+  border: none;
 }
 
 .stat {
   padding: 35px 25px 30px;
-  border-right: 1px solid var(--line);
-}
-
-.stat:last-child {
-  border-right: 0;
+  border: none;
 }
 
 .stat strong {
@@ -673,14 +667,6 @@ button {
 
   .stats-grid {
     grid-template-columns: 1fr 1fr;
-  }
-
-  .stat:nth-child(2) {
-    border-right: 0;
-  }
-
-  .stat:nth-child(-n + 2) {
-    border-bottom: 1px solid var(--line);
   }
 
   .footer-top {
