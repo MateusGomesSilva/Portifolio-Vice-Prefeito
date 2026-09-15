@@ -404,11 +404,54 @@ button {
   margin-bottom: 0.8rem;
 }
 
+/* CAROUSEL ATUAÇÃO */
+.atuacao-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-top: 2rem;
+  padding: 12px 0;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 4%, #000 96%, transparent 100%);
+}
+
+.atuacao-carousel.is-dragging {
+  cursor: grabbing;
+}
+
+.atuacao-track {
+  display: flex;
+  gap: 1.75rem;
+  width: max-content;
+  will-change: transform;
+}
+
+.atuacao-group {
+  display: flex;
+  gap: 1.75rem;
+  flex-shrink: 0;
+}
+
+.atuacao-group .card {
+  width: 320px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 700px) {
+  .atuacao-group .card {
+    width: 270px;
+    padding: 1.8rem 1.5rem;
+  }
+}
+
 /* STATS SECTION (PROJETOS E CONQUISTAS) */
 .stats-section {
   min-height: 90vh;
   position: relative;
-  background: url('hero-bg.jpg') center/cover fixed;
+  background: url('assets/hero-bg.jpg') center/cover fixed;
   display: flex;
   align-items: center;
 }

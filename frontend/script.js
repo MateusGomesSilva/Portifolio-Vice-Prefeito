@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let averageBg = '#173b57';
 
     function framePath(i) {
-      return `frames/frame-${String(i + 1).padStart(3, '0')}.webp`;
+      return `assets/frames/frame-${String(i + 1).padStart(3, '0')}.webp`;
     }
 
     function resizeCanvas() {
@@ -147,4 +147,112 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   topBtn?.addEventListener('click', () => lenis.scrollTo(0, { duration: 1.1 }));
+
+  // Atuação Carousel (Continuous Marquee Auto-Scroll)
+  const atuacaoCarousel = document.getElementById('atuacaoCarousel');
+  const atuacaoTrack = document.getElementById('atuacaoTrack');
+
+  if (atuacaoCarousel && atuacaoTrack) {
+    const originalGroup = atuacaoTrack.querySelector('.atuacao-group');
+    if (originalGroup) {
+      // Clone group to ensure continuous infinite loop across all screen resolutions
+      const cloneCount = 3;
+      for (let i = 0; i < cloneCount; i++) {
+        const clone = originalGroup.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        atuacaoTrack.appendChild(clone);
+      }
+
+      let x = 0;
+      const speed = 0.8; // Smooth auto-scroll speed (pixels per frame)
+      let isHovered = false;
+      let isDragging = false;
+      let startX = 0;
+      let currentX = 0;
+
+      function getGroupStep() {
+        const gap = parseFloat(window.getComputedStyle(atuacaoTrack).gap) || 28;
+        return originalGroup.offsetWidth + gap;
+      }
+
+      function getClientX(e) {
+        if (e.clientX !== undefined) return e.clientX;
+        if (e.touches && e.touches.length > 0) return e.touches[0].clientX;
+        if (e.changedTouches && e.changedTouches.length > 0) return e.changedTouches[0].clientX;
+        return 0;
+      }
+
+      // Sync continuous scrolling loop with GSAP ticker
+      gsap.ticker.add(() => {
+        if (!isDragging) {
+          if (!isHovered) {
+            x -= speed;
+          }
+          const step = getGroupStep();
+          if (step > 0) {
+            while (x <= -step) {
+              x += step;
+            }
+            while (x > 0) {
+              x -= step;
+            }
+          }
+          gsap.set(atuacaoTrack, { x: x });
+        }
+      });
+
+      // Hover controls: pause on hover for easy reading
+      atuacaoCarousel.addEventListener('mouseenter', () => { isHovered = true; });
+      atuacaoCarousel.addEventListener('mouseleave', () => {
+        isHovered = false;
+        if (isDragging) {
+          isDragging = false;
+          atuacaoCarousel.classList.remove('is-dragging');
+        }
+      });
+
+      // Pointer/Touch dragging support
+      const onPointerDown = (e) => {
+        isDragging = true;
+        startX = getClientX(e);
+        currentX = x;
+        atuacaoCarousel.classList.add('is-dragging');
+      };
+
+      const onPointerMove = (e) => {
+        if (!isDragging) return;
+        const pageX = getClientX(e);
+        const dragDelta = pageX - startX;
+        x = currentX + dragDelta;
+        const step = getGroupStep();
+        if (step > 0) {
+          while (x <= -step) {
+            x += step;
+            startX += step;
+          }
+          while (x > 0) {
+            x -= step;
+            startX -= step;
+          }
+        }
+        gsap.set(atuacaoTrack, { x: x });
+      };
+
+      const onPointerUp = () => {
+        if (isDragging) {
+          isDragging = false;
+          atuacaoCarousel.classList.remove('is-dragging');
+        }
+      };
+
+      atuacaoCarousel.addEventListener('mousedown', onPointerDown);
+      window.addEventListener('mousemove', onPointerMove);
+      window.addEventListener('mouseup', onPointerUp);
+
+      atuacaoCarousel.addEventListener('touchstart', onPointerDown, { passive: true });
+      window.addEventListener('touchmove', onPointerMove, { passive: true });
+      window.addEventListener('touchend', onPointerUp);
+    }
+  }
 });
+
